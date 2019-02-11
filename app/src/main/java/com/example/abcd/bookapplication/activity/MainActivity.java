@@ -163,7 +163,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void showAlertDialog(){
+    public void deleteNote(int id) {
+        db.deleteNote(id);
+        getAllNotes();
+        mAdapter.notifyDataSetChanged();
 
     }
 }

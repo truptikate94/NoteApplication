@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.abcd.bookapplication.R;
 import com.example.abcd.bookapplication.activity.CreateNoteActivity;
+import com.example.abcd.bookapplication.activity.MainActivity;
 import com.example.abcd.bookapplication.model.Note;
 
 import java.util.List;
@@ -74,9 +75,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
                 alertDialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        ((MainActivity)mcontext).deleteNote(noteList.get(position).getId());
                     }
                 });
+                alertDialog.show();
                 return true;
             }
         });

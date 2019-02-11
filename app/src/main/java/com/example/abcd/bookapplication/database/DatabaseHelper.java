@@ -89,17 +89,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return noteList;
     }
 
-    /*public int updateNote(Note note) {
-    SQLiteDatabase db = this.getWritableDatabase();
-
-    ContentValues values = new ContentValues();
-    values.put(Note.COLUMN_NOTE, note.getNote());
-
-    // updating row
-    return db.update(Note.TABLE_NAME, values, Note.COLUMN_ID + " = ?",
-            new String[]{String.valueOf(note.getId())});
-}*/
-
     public int updateNote(int id,String notes){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -108,6 +97,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return db.update(Note.TABLE_NOTE,values,Note.COL_ID+"=?",new String[]{String.valueOf(id)});
 
+    }
+
+    public void deleteNote(int id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Note.TABLE_NOTE,Note.COL_ID +"=?",new String[]{String.valueOf(id)});
+        db.close();
     }
 
 }

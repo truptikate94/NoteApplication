@@ -1,6 +1,7 @@
 package com.example.abcd.bookapplication.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,9 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
         edtNotes = findViewById(R.id.edt_notes);
         btnSave = findViewById(R.id.btn_save);
         btnCancel = findViewById(R.id.btn_cancel);
+
+       // edtNotes.setFocusable(false);
+         edtNotes.setOnClickListener(this);
 
         db = new DatabaseHelper(this);
         btnSave.setOnClickListener(this);
@@ -57,6 +61,12 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
                     saveNote(edtNotes.getText().toString());
                 else
                     Toast.makeText(this,"empty notes",Toast.LENGTH_SHORT).show();
+
+                break;
+
+            case R.id.edt_notes:
+                //edtNotes.setBackgroundColor(R.color.colorPrimary);
+                break;
         }
 
     }
