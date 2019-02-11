@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.abcd.bookapplication.R;
 import com.example.abcd.bookapplication.activity.CreateNoteActivity;
-import com.example.abcd.bookapplication.activity.MainActivity;
 import com.example.abcd.bookapplication.model.Note;
 
 import java.util.List;

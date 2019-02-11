@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.abcd.bookapplication.R;
 import com.example.abcd.bookapplication.database.DatabaseHelper;
-import com.example.abcd.bookapplication.model.Note;
 
 public class CreateNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
