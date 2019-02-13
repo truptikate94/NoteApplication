@@ -10,29 +10,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp">
+        <EditText
+            android:id="@+id/edt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:maxLines="1"
+            android:inputType="text"
+            android:textColor="@color/colorPrimaryDark"
+            android:hint="@string/note_title"/>
 
-    <EditText
-        android:id="@+id/edt_notes"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top"
-        android:inputType="textMultiLine|textCapSentences"
-        android:background="@android:color/transparent"
-        />
+        <EditText
+            android:id="@+id/edt_notes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/edt_title"
+            android:gravity="top"
+            android:inputType="textMultiLine|textCapSentences"
+            android:background="@android:color/transparent" />
 
-   <Button
-       android:id="@+id/btn_save"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" 
-       android:text="save"
-       android:layout_alignParentBottom="true"/>
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="cancel"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentBottom="true"/>
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 

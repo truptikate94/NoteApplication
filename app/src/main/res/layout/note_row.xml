@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         app:cardCornerRadius="10dp"
-        android:layout_margin="5dp">
+        android:layout_margin="8dp">
 
         <RelativeLayout
             android:id="@+id/relative_note"
@@ -28,6 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="date"
+                    android:maxLines="1"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"/>
             </RelativeLayout>
@@ -38,17 +39,42 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relative_date">
                 <TextView
-                    android:id="@+id/tv_file_name"
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="filename"/>
+                    android:text="@string/note_title"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"/>
                 <TextView
                     android:id="@+id/tv_file_content"
-                    android:layout_below="@+id/tv_file_name"
+                    android:layout_below="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="7"
                     android:text="file content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_below="@+id/relative_file">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="folder"
+                    />
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_star"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"/>
             </RelativeLayout>
 
 

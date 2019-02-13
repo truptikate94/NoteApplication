@@ -18,6 +18,9 @@ import com.example.abcd.bookapplication.activity.CreateNoteActivity;
 import com.example.abcd.bookapplication.activity.MainActivity;
 import com.example.abcd.bookapplication.model.Note;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> {
@@ -33,9 +36,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         RelativeLayout relativeNote;
-        TextView tvDate,tvNote;
+        TextView tvDate,tvNote,tvTitle;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
             relativeNote = itemView.findViewById(R.id.relative_note);
             tvNote = itemView.findViewById(R.id.tv_file_content);
             tvDate = itemView.findViewById(R.id.tv_date);
@@ -52,14 +56,16 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         final Note note = noteList.get(position);
+        holder.tvTitle.setText(note.getTitle());
         holder.tvNote.setText(note.getNote());
-        holder.tvDate.setText(note.getDate());
+        holder.tvDate.setText(formatDate(note.getDate()));
         holder.relativeNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(mcontext,CreateNoteActivity.class);
                 intent.putExtra("TAG","editNote");
+                intent.putExtra("title",noteList.get(position).getTitle());
                 intent.putExtra("contents",noteList.get(position).getNote());
                 intent.putExtra("id",noteList.get(position).getId());
                 ((Activity)mcontext).startActivityForResult(intent,1);
@@ -70,7 +76,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         holder.relativeNote.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(mcontext);
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mcontext,R.style.CustomDialogTheme);
                 alertDialog.setMessage("do you want to delete this note?");
                 alertDialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -78,11 +84,29 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
                         ((MainActivity)mcontext).deleteNote(noteList.get(position).getId());
                     }
                 });
+                alertDialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //alertDialog.setCancelable(true);
+                    }
+                });
                 alertDialog.show();
                 return true;
             }
         });
 
+    }
+
+    private String formatDate(String date){
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date dt = dateFormat.parse(date);
+            SimpleDateFormat format = new SimpleDateFormat("dd MMM,yyyy HH:mm");
+            return format.format(dt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     @Override

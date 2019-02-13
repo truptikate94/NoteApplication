@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         db = new DatabaseHelper(this);
-       // db.deleteTable();
+        //db.deleteTable();
         recyclerView = findViewById(R.id.recycler);
         noteList = new ArrayList<>();
         tvEmptyList = findViewById(R.id.tv_empty_list);
@@ -105,28 +105,37 @@ public class MainActivity extends AppCompatActivity {
             {
                 int id = data.getIntExtra("id",0);
                 String notes = data.getStringExtra("notes");
+                String title = data.getStringExtra("title");
                 if(id == 0 )
                 {
-                    insertNote(notes);
+                    insertNote(notes,title);
                 }
                 else
                 {
-                    updateNote(id,notes);
+                    updateNote(id,notes,title);
                 }
             }
 
         }
     }
 
-    private void updateNote(int id, String notes) {
+    private void updateNote(int id, String notes, String title) {
 
-        db.updateNote(id,notes);
+        Note note = new Note();
+        note.setId(id);
+        note.setTitle(title);
+        note.setNote(notes);
+        db.updateNote(note);
         getAllNotes();
         mAdapter.notifyDataSetChanged();
 
     }
 
-    private void insertNote(String note) {
+    private void insertNote(String notes, String title) {
+
+        Note note = new Note();
+        note.setTitle(title);
+        note.setNote(notes);
 
         Long id = db.insertNotes(note);
         Note note1 = db.getNotes(id);

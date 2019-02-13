@@ -14,7 +14,7 @@ import com.example.abcd.bookapplication.database.DatabaseHelper;
 
 public class CreateNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText edtNotes;
+    EditText edtNotes,edtTitle;
     Button btnSave,btnCancel;
     int updateID;
 
@@ -23,12 +23,10 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
+        edtTitle = findViewById(R.id.edt_title);
         edtNotes = findViewById(R.id.edt_notes);
         btnSave = findViewById(R.id.btn_save);
         btnCancel = findViewById(R.id.btn_cancel);
-
-       // edtNotes.setFocusable(false);
-         edtNotes.setOnClickListener(this);
 
         db = new DatabaseHelper(this);
         btnSave.setOnClickListener(this);
@@ -44,6 +42,7 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
         updateID = getIntent().getIntExtra("id",0);
         if(TAG.equals("editNote"))
         {
+            edtTitle.setText(getIntent().getStringExtra("title"));
             edtNotes.setText(getIntent().getStringExtra("contents"));
         }
     }
@@ -57,16 +56,13 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
                 cancelNote();
                 break;
             case R.id.btn_save:
-                if(edtNotes.getText() != null)
-                    saveNote(edtNotes.getText().toString());
+                if(edtNotes.getText() != null && edtTitle.getText() != null)
+                    saveNote(edtNotes.getText().toString(),edtTitle.getText().toString());
                 else
                     Toast.makeText(this,"empty notes",Toast.LENGTH_SHORT).show();
 
                 break;
 
-            case R.id.edt_notes:
-                //edtNotes.setBackgroundColor(R.color.colorPrimary);
-                break;
         }
 
     }
@@ -79,9 +75,10 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
         finish();
     }
 
-    private void saveNote(String notes) {
+    private void saveNote(String notes, String title) {
 
         Intent intent = new Intent();
+        intent.putExtra("title",title);
         intent.putExtra("notes",notes);
         intent.putExtra("id",updateID);
         intent.putExtra("TAG","save");
