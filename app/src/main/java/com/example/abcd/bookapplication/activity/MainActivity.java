@@ -115,6 +115,11 @@ public class MainActivity extends AppCompatActivity {
                     updateNote(id,notes,title);
                 }
             }
+            else if(data.getStringExtra("TAG").equals("cancel"))
+            {
+                String msg = data.getStringExtra("message");
+                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+            }
 
         }
     }

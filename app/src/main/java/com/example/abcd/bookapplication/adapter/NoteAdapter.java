@@ -101,7 +101,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date dt = dateFormat.parse(date);
-            SimpleDateFormat format = new SimpleDateFormat("dd MMM,yyyy HH:mm");
+            SimpleDateFormat format = new SimpleDateFormat("dd MMM,yyyy hh:mm a");
             return format.format(dt);
         } catch (ParseException e) {
             e.printStackTrace();
